@@ -64,42 +64,43 @@ public class ruisJsonParsers<T> {
 	            	{
 	            		if(objs instanceof JSONObject||objs instanceof JSONArray)
 	        			{
-	        				if(ftype.equals("java.util.List"))
-	        				{
-	        					Field[] fls=null;
-	        					Object inst=null;
-	        					JSONObject jsonObj=null;
-	        					String name=result.getClass().getName();
-                                String oname=fname;//+"_cls";
-                                Class<?>[] cls=Tclass.getClasses();
-                                for(Class<?> cl : cls) {
-                                    if(cl.getName().equals(name+"$"+oname)) {
-                                    	inst=cl.newInstance();
-                                    	fls=cl.getDeclaredFields();
-                                    	
+        					Field[] fls=null;
+        					Object inst=null;
+        					JSONObject jsonObj=null;
+        					String name=result.getClass().getName();
+                            String oname=fname;//+"_cls";
+                            Class<?>[] cls=Tclass.getClasses();
+                            for(Class<?> cl : cls) {
+                                if(cl.getName().equals(name+"$"+oname)) {
+                                	inst=cl.newInstance();
+                                	fls=cl.getDeclaredFields();
+
+        	        				if(ftype.equals("java.util.List"))
+        	        				{
                                     	List<Object> flist=(List)fld.get(obj);
                                         if(flist==null)
                                             flist=new ArrayList<Object>();
                                         flist.add(inst);
                                     	fld.set(obj, flist);
-                                    	break;
-                                    }
+        	        				}else
+                                    	fld.set(obj, inst);
+                                	break;
                                 }
-                                
-                                if(objs instanceof JSONObject){
-                                	jsonObj=(JSONObject)objs;
+                            }
+
+                            if(objs instanceof JSONObject){
+                            	jsonObj=(JSONObject)objs;
+                                if(fls!=null&&jsonObj!=null&&inst!=null)
+                                	parses(fls,jsonObj,inst);
+                            }else if(ftype.equals("java.util.List")){
+                            	JSONArray ja=(JSONArray)objs;
+                            	int size=ja.length();
+                            	for(int j=0;j<size;j++)
+                            	{
+                            		jsonObj = (JSONObject) ja.get(j);
                                     if(fls!=null&&jsonObj!=null&&inst!=null)
                                     	parses(fls,jsonObj,inst);
-                                }else{
-                                	JSONArray ja=(JSONArray)objs;
-                                	int size=ja.length();
-                                	for(int j=0;j<size;j++)
-                                	{
-                                		jsonObj = (JSONObject) ja.get(j);
-                                        if(fls!=null&&jsonObj!=null&&inst!=null)
-                                        	parses(fls,jsonObj,inst);
-                                	}
-                                }
+                            	}
 	        				}
 	        			}else{
 		                    try {
