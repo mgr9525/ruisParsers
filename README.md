@@ -6,7 +6,7 @@ json/xml parser , ormore!
 
 json text:
 ###test json text
-{"e": {"desc": "","provider": "play","code": 0},"data": {"id": 381858926,"stream": [{"logo": "none","segs": [{"key": "73458f4978ce6025261ef3a2","size": "27196325"}],"width": 640}]}}
+    {"e": {"desc": "","provider": "play","code": 0},"data": {"id": 381858926,"stream": [{"logo": "none","segs": [{"key": "73458f4978ce6025261ef3a2","size": "27196325"}],"width": 640}]}}
 ###
 
 ```Java
@@ -18,5 +18,5 @@ System.out.println(info.getData().get(0).getId()+"|"+info.getData().get(0).getSt
 ```
 
 ###output:
-381858926|c3eae93a3c93b596282b5570
+    381858926|c3eae93a3c93b596282b5570
 
