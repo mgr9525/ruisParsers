@@ -9,6 +9,7 @@ json text:
     {"e": {"desc": "","provider": "play","code": 0},"data": {"id": 381858926,"stream": [{"logo": "none","segs": [{"key": "73458f4978ce6025261ef3a2","size": "27196325"}],"width": 640}]}}
 ###
 
+###Text to parsing
 ```Java
 String neirong= "";//上面的json内容
 Youku_beans info=new Youku_beans();
