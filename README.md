@@ -20,3 +20,63 @@ System.out.println(info.getData().get(0).getId()+"|"+info.getData().get(0).getSt
 ###output:
     381858926|c3eae93a3c93b596282b5570
 
+
+###Youku_beans class
+```Java
+import java.io.Serializable;
+import java.util.List;
+
+public class Youku_beans implements Serializable {
+	private List<Youku_beans.data> data;
+	
+	public List<Youku_beans.data> getData() {
+		return data;
+	}
+
+	public void setData(List<Youku_beans.data> data) {
+		this.data = data;
+	}
+
+	public static class data implements Serializable{
+		private long id;
+		private List<Youku_beans.stream> stream;
+		
+		public long getId() {
+			return id;
+		}
+		public void setId(long id) {
+			this.id = id;
+		}
+		public List<Youku_beans.stream> getStream() {
+			return stream;
+		}
+		public void setStream(List<Youku_beans.stream> stream) {
+			this.stream = stream;
+		}
+	}
+
+	public static class stream implements Serializable{
+		private List<Youku_beans.segs> segs;
+
+		public List<Youku_beans.segs> getSegs() {
+			return segs;
+		}
+
+		public void setSegs(List<Youku_beans.segs> segs) {
+			this.segs = segs;
+		}
+	}
+
+	public static class segs implements Serializable{
+		private String key;
+
+		public String getKey() {
+			return key;
+		}
+
+		public void setKey(String key) {
+			this.key = key;
+		}
+	}
+}
+```
