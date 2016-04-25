@@ -64,6 +64,14 @@ public class ruisJsonParsers<T> {
 	            	{
 	            		if(objs instanceof JSONObject||objs instanceof JSONArray)
 	        			{
+	        				if(ftype.equals("java.lang.String"))
+	        				{
+			                    try {
+			                         fld.set(obj, objs.toString());
+			                    } catch (Exception e) {
+			                    }
+			                    return;
+	        				}
         					Field[] fls=null;
         					Object inst=null;
         					JSONObject jsonObj=null;
