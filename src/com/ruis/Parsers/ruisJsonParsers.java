@@ -46,8 +46,9 @@ public class ruisJsonParsers<T> {
 			        			parseNeirong(flds,obj,key,o);
 			        		}
 		    	        }catch (Exception e){
-		    	        	if(e.getMessage()!=null)
-		    	        	System.err.println("ruis_err:ruisJsonParsers->parses : "+e.getMessage());
+		    	        	e.printStackTrace();
+		    	        	/*if(e.getMessage()!=null)
+		    	        	System.err.println("ruis_err:ruisJsonParsers->parses : "+e.getMessage());*/
 		    	        }
 		        	} 
 	    }
@@ -62,16 +63,15 @@ public class ruisJsonParsers<T> {
 	                String ftype = fld.getType().getName();
 	            	if(fname.equals(key))
 	            	{
+        				if(ftype.equals("java.lang.String"))
+        				{
+		                    try {
+		                        fld.set(obj, objs.toString());
+		                    } catch (Exception e) {
+		                    }
+        				}else
 	            		if(objs instanceof JSONObject||objs instanceof JSONArray)
 	        			{
-	        				if(ftype.equals("java.lang.String"))
-	        				{
-			                    try {
-			                         fld.set(obj, objs.toString());
-			                    } catch (Exception e) {
-			                    }
-			                    return;
-	        				}
         					Field[] fls=null;
         					Object inst=null;
         					JSONObject jsonObj=null;
