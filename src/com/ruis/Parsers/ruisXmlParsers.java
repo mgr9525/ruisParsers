@@ -27,10 +27,10 @@ public class ruisXmlParsers<T> {
         objList=new ArrayList<ListNode>();
         fields=t.getClass().getDeclaredFields();
         try {
-            Tclass = Class.forName(t.getClass().getName());
             pullParserFactory = XmlPullParserFactory.newInstance();
             parser = pullParserFactory.newPullParser(); //由android.util.Xml创建一个XmlPullParser实例
-        }catch (Exception e){Tclass=null;}
+            Tclass = Class.forName(t.getClass().getName());
+        }catch (Exception e){Tclass=null;e.printStackTrace();}
     }
 
     public void parse(String strs) throws Exception
