@@ -38,6 +38,7 @@ public class ruisXmlParsers<T> {
         if(fields==null)
             throw new Exception("错误的类");
         parser.setInput(new StringReader(strs.trim()));
+        XmlPullParser tper=null;
         int eventType = parser.getEventType();
         while (eventType != XmlPullParser.END_DOCUMENT) {
             switch (eventType) {
@@ -66,6 +67,7 @@ public class ruisXmlParsers<T> {
     {
         try {
             //Field[] flds=objNode.getCls().getClass().getDeclaredFields();
+			System.out.println("startTagNeirong tag name:"+parser.getName());
 
             for (int i = 0; i < flds.length; i++) {
                 flds[i].setAccessible(true);
@@ -74,12 +76,17 @@ public class ruisXmlParsers<T> {
                 if (parser.getName().equals(fname)) {
                     Object val = null;
                     try {
+                    	int evtp=0;
                         switch (flds[i].getType().getName()) {
                             case "int":
-                                val = Integer.parseInt(parser.getText());
+                            	evtp=parser.next();
+                            	if(evtp==XmlPullParser.TEXT)
+                            		val = Integer.parseInt(parser.getText());
                                 break;
                             case "java.lang.String":
-                                val = parser.getText();
+                            	evtp=parser.next();
+                            	if(evtp==XmlPullParser.TEXT)
+                            		val = parser.getText();
                                 break;
                             case "java.util.List":
                                 String name=result.getClass().getName();
